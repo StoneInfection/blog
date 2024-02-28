@@ -1,0 +1,38 @@
+version: "3.9"
+
+x-app: &default-app
+  build: .
+  restart: always
+
+x-env: &env
+  env_file:
+    - .env
+
+services:
+  api:
+    <<: [*default-app, *env]
+    container_name: blog-back
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/app
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    <<: *env
+    container_name: blog-db
+    image: postgres:15.3-alpine
+    ports:
+      - 5432:5432
+    healthcheck:
+      test: pg_isready -d ${POSTGRES_DB} -U ${POSTGRES_USER}
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - blog_pg_data:/var/lib/postgresql/data
+
+volumes:
+  blog_pg_data:
