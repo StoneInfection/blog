@@ -1,13 +1,13 @@
 from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.category.dependencies.session import ISession
 from src.category.categories_dto import CreateCategoryDTO
 from src.category.categories_model import CategoryModel
 
 
 class CategoryRepository:
 
-    def __init__(self, session: ISession):
+    def __init__(self, session: AsyncSession):
         self.session = session
 
     async def create(self, dto: CreateCategoryDTO):

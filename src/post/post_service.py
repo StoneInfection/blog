@@ -1,10 +1,10 @@
-from src.post.dependencies.repositories import IPostRepository
 from src.post.post_dto import CreatePostDTO, UpdatePostDTO
+from src.post.post_repository import PostRepository
 
 
 class PostService:
 
-    def __init__(self, repository: IPostRepository):
+    def __init__(self, repository: PostRepository):
         self.repository = repository
 
     async def create(self, dto: CreatePostDTO):

@@ -1,10 +1,10 @@
-from src.category.dependencies.repositories import ICategoryRepository
 from src.category.categories_dto import CreateCategoryDTO
+from src.category.category_repository import CategoryRepository
 
 
 class CategoryService:
 
-    def __init__(self, repository: ICategoryRepository):
+    def __init__(self, repository: CategoryRepository):
         self.repository = repository
 
     async def create(self, dto: CreateCategoryDTO):

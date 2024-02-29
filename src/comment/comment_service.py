@@ -1,10 +1,10 @@
 from src.comment.comment_dto import CreateCommentDTO, UpdateCommentDTO
-from src.comment.dependencies.repositories import ICommentRepository
+from src.comment.comment_repository import CommentRepository
 
 
 class CommentService:
 
-    def __init__(self, repository: ICommentRepository):
+    def __init__(self, repository: CommentRepository):#, repo_post: IPostRepository):
         self.repository = repository
 
     async def create(self, dto: CreateCommentDTO):

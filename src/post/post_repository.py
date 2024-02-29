@@ -1,7 +1,7 @@
 from sqlalchemy import select, update
+from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import joinedload
 
-from src.category.dependencies.session import ISession
 from src.comment.comment_model import CommentModel
 from src.post.post_dto import CreatePostDTO, UpdatePostDTO
 from src.post.post_model import PostModel
@@ -9,7 +9,7 @@ from src.post.post_model import PostModel
 
 class PostRepository:
 
-    def __init__(self, session: ISession):
+    def __init__(self, session: AsyncSession):
         self.session = session
 
     async def create(self, dto: CreatePostDTO):

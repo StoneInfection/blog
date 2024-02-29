@@ -1,13 +1,14 @@
 from sqlalchemy import update, delete
+from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.category.dependencies.session import ISession
 from src.comment.comment_dto import CreateCommentDTO, UpdateCommentDTO
 from src.comment.comment_model import CommentModel
+# from src.comment.interface import ICommentRepository
 
 
-class CommentRepository:
+class CommentRepository:#(ICommentRepository):
 
-    def __init__(self, session: ISession):
+    def __init__(self, session: AsyncSession):
         self.session = session
 
     async def create(self, dto: CreateCommentDTO):
